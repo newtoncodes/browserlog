@@ -1,8 +1,20 @@
-# Browser console log utility
+# browserlog
+
+Browser console log utility.
+
+## Installation
+
+`npm install --save browserlog`
+
+The UMD build is in the dist directory.
+
+## Description
 
 This logger is compatible with the known console api of chrome and firefox (and the others).
 
 Supports timers, counters and groups. Also colors.
+
+[Twin brother for the server: serverlog](https://github.com/newtoncodes/serverlog)
 
 
 ### Default logger

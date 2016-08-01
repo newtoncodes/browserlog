@@ -1,7 +1,7 @@
 {
   "name": "browserlog",
   "description": "Log utility for the browser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./es5/index.js",
   "scripts": {
     "build:es5": "babel src --out-dir es5",
