@@ -14,7 +14,11 @@ This logger is compatible with the known console api of chrome and firefox (and 
 
 Supports timers, counters and groups. Also colors.
 
-[Twin brother for the server: serverlog](https://github.com/newtoncodes/serverlog)
+**Twin brother for the server - serverlog:**
+
+https://www.npmjs.com/package/serverlog
+
+https://github.com/newtoncodes/serverlog
 
 
 ### Default logger
