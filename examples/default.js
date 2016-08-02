@@ -22,10 +22,13 @@ window.default = function () {
     console.log('MULTI\nLINE\nTEXT\nLOG', 'MULTI\nLINE\nTEXT\nLOG');
     console.log({test: 1});
 
-    console.group('Group test #1');
+    console.group('Group te\nst #1');
     console.log('Normal log behavior:', 2, {test: 1});
     console.table({test: 1}, 'Some compatibility fns.');
     console.debug({test: 1}, 'Some alias fns.');
+
+    console.log('MULTI\nLINE\nTEXT\nLOG', 2, 'MULTI\nLINE\nTEXT\nLOG');
+    console.log('MULTI\nLINE\nTEXT\nLOG', 'MULTI\nLINE\nTEXT\nLOG');
 
     console.groupCollapsed('Group test #2');
     console.assert(false, 'Test assert #2');

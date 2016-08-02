@@ -68,6 +68,7 @@ class Stream {
         if (typeof bufferDate === 'undefined') bufferDate = true;
         if (typeof bufferTime === 'undefined') bufferTime = true;
         if (typeof colors === 'undefined') colors = true;
+        if (typeof colorsFull === 'undefined') colorsFull = (colors && !label);
 
         /**
          * @type {Logger}
@@ -301,7 +302,7 @@ class Stream {
      * @param {...*} [param]
      */
     group(param) {
-        this.writeBuffer('+ ' + Util.format.apply(this, arguments) + '\n');
+        this.writeBuffer(Util.format.apply(this, arguments) + '\n', true);
         this.writeConsole('group', [].map.call(arguments, a => a));
         this._depth ++;
     }
@@ -310,7 +311,7 @@ class Stream {
      * @param {...*} [param]
      */
     groupCollapsed(param) {
-        this.writeBuffer('+ ' + Util.format.apply(this, arguments) + '\n');
+        this.writeBuffer(Util.format.apply(this, arguments) + '\n', true);
         this.writeConsole('groupCollapsed', [].map.call(arguments, a => a));
         this._depth ++;
     }
@@ -376,26 +377,25 @@ class Stream {
     /**
      *
      * @param {string} text
+     * @param {boolean} [startGroup]
      * @protected
      */
-    writeBuffer(text) {
+    writeBuffer(text, startGroup) {
         if (!this._save && !this._saveLogger) return;
 
         let nl = (text.slice(-1) === '\n');
         text = text.replace(/\n$/, '');
 
         if (!this._nl) {
-            if (text.indexOf('\n') !== -1) {
-                if (this._depth) text = indent(text, ':  '.repeat(this._depth));
+            text = indentGroup(text, this._depth, null, true);
 
+            if (text.indexOf('\n') !== -1) {
                 text = indentLabel(text, this._label);
                 text = indentDate(text, this._bufferDate, this._bufferTime);
-            } else {
-                if (this._depth) text = indent(text, ':  '.repeat(this._depth));
             }
         } else {
-            if (this._depth) text = indent(text, ':  '.repeat(this._depth));
-
+            if (startGroup) text = appendGroup(text, this._depth + 1, ['grey']);
+            text = indentGroup(text, this._depth);
             text = appendLabel(text, this._label);
             text = appendDate(text, this._bufferDate, this._bufferTime);
         }
@@ -698,7 +698,7 @@ function getDate(date, time) {
 }
 
 function indent(text, str) {
-    return (text || '').replace(/^(.)/gm, (s, a) => str + a);
+    return (text || '').replace(/^(.|$)/gm, (s, a) => str + a);
 }
 
 function appendDate(text, date, time) {
@@ -707,7 +707,7 @@ function appendDate(text, date, time) {
     else d = '';
     let r = ' '.repeat(d.length);
 
-    return (text || '').replace(/^(.*)/gm, (s, a) => r + a).replace(r, d);
+    return (text || '').replace(/^(.|$)/gm, (s, a) => r + a).replace(r, d);
 }
 
 function indentDate(text, date, time) {
@@ -728,6 +728,14 @@ function appendLabel(text, label) {
     return label + indent(text, r).replace(r, '');
 }
 
+function appendGroup(text, depth) {
+    if (depth <= 0) return text;
+
+    let r = '  '.repeat(depth);
+
+    return (text || '').replace(/^(.|$)/gm, (s, a) => r + a).replace(r, '+ ');
+}
+
 function indentLabel(text, label) {
     if (!label) return text;
 
@@ -735,6 +743,17 @@ function indentLabel(text, label) {
     let r = ' '.repeat(label.length);
 
     return indent(text, r).replace(r, '');
+}
+
+function indentGroup(text, depth, cut) {
+    if (depth <= 0) return text;
+
+    let r = ':  '.repeat(depth);
+
+    let t = (text || '').replace(/^(.|$)/gm, (s, a) => r + a);
+    if (cut) t = t.replace(r, '');
+
+    return t;
 }
 
 

@@ -34,7 +34,7 @@ let console = new Logger({
     silent: false,           // Mute console output
     save: false,             // Save buffer for later use (send to server or something)
     saveLogger: false,       // Save current buffer to the main logger too
-    bufferSize: 1024 * 1024, // Saved buffere size limit in bytes
+    bufferSize: 1024 * 1024, // Saved buffer size limit in bytes
     bufferDate: true,        // Display date in saved buffer
     bufferTime: false,       // Display time in saved buffer
     colors: true,            // Display colors and styles in console
@@ -78,7 +78,7 @@ console.log('Test.');
 const Logger = require('../index');
 
 let console = new Logger({
-    'label': 'APP'
+    label: 'APP'
 });
 
 console.add('stream1', {

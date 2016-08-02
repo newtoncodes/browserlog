@@ -291,52 +291,52 @@ class Logger {
 
     /** @return {Array.<string>|string} */
     get style() {
-        return this.__default._style;
+        return this.__default.style;
     }
 
     /** @return {boolean} */
     get silent() {
-        return this.__default._silent;
+        return this.__default.silent;
     }
 
     /** @return {boolean} */
     get save() {
-        return this.__default._save;
+        return this.__default.save;
     }
 
     /** @return {string} */
     get buffer() {
-        return this.__default._buffer;
+        return this.__default.buffer;
     }
 
     /** @return {number} */
     get bufferSize() {
-        return this.__default._bufferSize;
+        return this.__default.bufferSize;
     }
 
     /** @return {boolean} */
     get bufferDate() {
-        return this.__default._bufferDate;
+        return this.__default.bufferDate;
     }
 
     /** @return {boolean} */
     get bufferTime() {
-        return this.__default._bufferTime;
+        return this.__default.bufferTime;
     }
 
     /** @return {boolean} */
     get colors() {
-        return this.__default._colors;
+        return this.__default.colors;
     }
 
     /** @return {boolean} */
     get colorsFull() {
-        return this.__default._colorsFull;
+        return this.__default.colorsFull;
     }
 
     /** @return {string} */
     get label() {
-        return this.__default._label;
+        return this.__default.label;
     }
 
     /**
