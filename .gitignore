@@ -30,7 +30,6 @@
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
-.idea
 .DS_Store
 node_modules/
 npm-debug.log
